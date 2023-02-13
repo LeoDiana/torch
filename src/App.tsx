@@ -3,7 +3,7 @@ import './App.css';
 
 function App (): JSX.Element {
   return (
-    <div></div>
+    <div className='text-3xl font-bold underline'>HELLO BLIAT WORLD</div>
   );
 }
 
