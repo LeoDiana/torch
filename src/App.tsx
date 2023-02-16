@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import Card from './components/Card';
 
-function App (): JSX.Element {
+const App = (): JSX.Element => {
   return (
-    <div></div>
+    <Card />
   );
-}
+};
 
 export default App;
