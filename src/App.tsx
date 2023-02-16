@@ -1,10 +1,11 @@
 import React from 'react';
 import './App.css';
+import Card from './components/Card';
 
-function App (): JSX.Element {
+const App = (): JSX.Element => {
   return (
-    <div className='text-3xl font-bold underline'>HELLO BLIAT WORLD</div>
+    <Card />
   );
-}
+};
 
 export default App;

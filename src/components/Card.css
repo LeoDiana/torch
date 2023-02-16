@@ -1,0 +1,38 @@
+.button {
+  position: relative;
+  transition: 2s;
+  overflow: hidden;
+  border: 2px solid black;
+}
+
+.button:hover,
+.button:focus {
+  filter: brightness(1.25);
+  cursor: pointer;
+  outline: none;
+}
+
+.button::before,
+.button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -200px;
+  width: 60px;
+  height: 100%;
+  background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(255,129,0,1) 15%, rgba(248,255,0,1) 30%, rgba(77,255,50,1) 45%, rgba(117,221,244,1) 60%, rgba(0,96,251,1) 75%, rgba(255,0,226,1) 89%, rgba(205,0,225,1) 100%);
+  filter: blur(13px);
+  transform: skewX(-30deg);
+}
+
+.button:hover::before,
+.button:focus::before {
+  left: calc(100% + 150px);
+  transition: 2s;
+}
+
+.button:hover::after,
+.button:focus::after {
+  left: calc(100% + 150px);
+  transition: 2s 0.5s;
+}
