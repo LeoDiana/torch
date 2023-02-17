@@ -1,12 +1,13 @@
 import React from 'react';
 import './Card.css';
+import animationFlower from '../img/animation_circle.jpeg';
 
 const Card = (): JSX.Element => {
   return (
-    <div className="flex font-sans w-96 bg-white rounded-2xl ">
+    <div className="flex font-sans w-116 bg-white rounded-2xl main mt-4 overflow-hidden">
 
-        <div className="flex-none w-48 relative">
-            <img src='/logo512.png' alt="smthing" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div className="flex-none w-60 relative">
+            <img src={animationFlower} alt="smthing" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         </div>
         <form className="flex-auto p-6">
             <div className="flex flex-wrap">

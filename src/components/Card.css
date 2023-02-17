@@ -1,3 +1,7 @@
+.main {
+  box-shadow: rgba(191, 191, 197, 0.472) -5px 5px, rgba(147, 145, 162, 0.472) -10px 10px, rgba(103, 102, 114, 0.3) -15px 15px, rgba(64, 64, 72, 0.2) -20px 20px, rgba(30, 30, 34, 0.1) -25px -25px;
+}
+
 .button {
   position: relative;
   transition: 2s;
