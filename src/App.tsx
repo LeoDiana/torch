@@ -1,10 +1,17 @@
 import React from 'react';
 import './App.css';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Catalog from './pages/Catalog';
 
-function App (): JSX.Element {
+const App = (): JSX.Element => {
   return (
-    <div className='text-3xl font-bold underline'>HELLO BLIAT WORLD</div>
+    <>
+      <Header />
+      <Catalog />
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;
