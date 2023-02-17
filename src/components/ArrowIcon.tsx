@@ -1,9 +1,14 @@
 import React from 'react';
+import './ArrowIcon.css';
 
-const ArrowIcon = (): JSX.Element => {
+export const RightArrowIcon = (): JSX.Element => {
   return (
-    <div></div>
+    <a href="#" className="fixed top-1/2 right-0 mr-10 arrow animate-pulse"></a>
   );
 };
 
-export default ArrowIcon;
+export const BottomArrowIcon = (): JSX.Element => {
+  return (
+      <a href="#" className="fixed left-1/2 -translate-x-1/2 bottom-0 mb-10 arrow animate-pulse rotate-90"></a>
+  );
+};
