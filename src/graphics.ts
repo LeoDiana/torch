@@ -1,7 +1,7 @@
 import Two from 'two.js';
 
 const params = { fullscreen: true };
-const elem = document.body;
+const elem = document.querySelector('#canvas') as HTMLElement;
 export const canvas = new Two(params).appendTo(elem);
 
 canvas.play();
