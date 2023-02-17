@@ -1,8 +1,10 @@
-import { canvas, center } from './graphics';
+import { canvas, center, clear } from './graphics';
 import anime from 'animejs/lib/anime.es.js';
 import { lineLength, getColorOnRainbow, degToRad, coordsOnAxis } from './math';
 
 export const simpleReactRotation = (): void => {
+  clear();
+
   const width = 400;
   const rect = canvas.makeRectangle(center.x, center.y, width, width);
 
@@ -29,6 +31,8 @@ export const simpleReactRotation = (): void => {
 };
 
 export function circlesSimple (): void {
+  clear();
+
   const selectedColor = 'red';
   const defaultColor = 'white';
 
@@ -67,6 +71,11 @@ export function circlesSimple (): void {
 }
 
 export function circles (): void {
+  clear();
+
+  anime.running.length = 0;
+  canvas.clear();
+
   const defaultColor = '#000';
 
   const selectedLineWidth = 8;
@@ -118,12 +127,12 @@ export function circles (): void {
     });
   }
 
-  const cursor = document.querySelector('#cursor') as HTMLElement;
+  // const cursor = document.querySelector('#cursor') as HTMLElement;
   let timer = setInterval(blick, 5000);
 
   document.onmousemove = (event) => {
-    cursor.style.left = `${event.clientX}px`;
-    cursor.style.top = `${event.clientY}px`;
+    // cursor.style.left = `${event.clientX}px`;
+    // cursor.style.top = `${event.clientY}px`;
     const mouseDistFromCenter = lineLength(event.clientX, event.clientY, center.x, center.y);
 
     const offset = 0.2;
@@ -141,6 +150,10 @@ export function circles (): void {
 }
 
 export const spiral = (): void => {
+  clear();
+
+  anime.running.length = 0;
+  canvas.clear();
   const count = 35;
   const widthMax = 600;
   const widthMin = 130;
@@ -209,6 +222,8 @@ export const spiral = (): void => {
 };
 
 export function elasticSurface (): void {
+  clear();
+
   const count = 15;
   const diskTilt = degToRad(45);
   const axisTilt = degToRad(15);
