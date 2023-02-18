@@ -12,6 +12,23 @@ export const center = {
   y: canvas.height / 2
 };
 
+const cursor = document.querySelector('#cursor') as HTMLElement;
+
+export const turnOnCustomCursor = (): void => {
+  document.body.style.cursor = 'none';
+  cursor.style.display = 'block';
+};
+
+export const turnOffCustomCursor = (): void => {
+  document.body.style.cursor = 'pointer';
+  cursor.style.display = 'none';
+};
+
+export const moveCursor = (x: number, y: number): void => {
+  cursor.style.left = `${x}px`;
+  cursor.style.top = `${y}px`;
+};
+
 export const clear = (): void => {
   canvas.clear();
   anime.running.length = 0;

@@ -1,6 +1,8 @@
-import { canvas, center, clear } from './graphics';
+import { canvas, center, clear, moveCursor, turnOnCustomCursor } from './graphics';
 import anime from 'animejs/lib/anime.es.js';
 import { lineLength, getColorOnRainbow, degToRad, coordsOnAxis } from './math';
+import { type Ellipse } from 'two.js/src/shapes/ellipse';
+import { type Circle } from 'two.js/src/shapes/circle';
 
 export const simpleReactRotation = (): void => {
   clear();
@@ -72,23 +74,19 @@ export function circlesSimple (): void {
 
 export function circles (): void {
   clear();
-
-  anime.running.length = 0;
-  canvas.clear();
-
-  const defaultColor = '#000';
-
-  const selectedLineWidth = 8;
-  const defaultLineWidth = 0.8;
+  turnOnCustomCursor();
 
   const count = 30;
   const minR = 50;
   const maxR = 800;
   const delta = (maxR - minR) / count;
 
-  let selectedIndex = 0;
-
+  const defaultColor = '#000';
+  const selectedLineWidth = 8;
+  const defaultLineWidth = 0.8;
   const getColor = getColorOnRainbow.bind(null, count);
+
+  let selectedIndex = 0;
 
   const circles = Array.from({ length: count }).map((el, i) => {
     const circle = canvas.makeCircle(center.x, center.y, minR + delta * i);
@@ -127,14 +125,13 @@ export function circles (): void {
     });
   }
 
-  // const cursor = document.querySelector('#cursor') as HTMLElement;
-  let timer = setInterval(blick, 5000);
+  const showHintDelay = 5000;
+  let timer = setInterval(blick, showHintDelay);
 
   document.onmousemove = (event) => {
-    // cursor.style.left = `${event.clientX}px`;
-    // cursor.style.top = `${event.clientY}px`;
-    const mouseDistFromCenter = lineLength(event.clientX, event.clientY, center.x, center.y);
+    moveCursor(event.clientX, event.clientY);
 
+    const mouseDistFromCenter = lineLength(event.clientX, event.clientY, center.x, center.y);
     const offset = 0.2;
     const currCircleIndex = Math.floor(mouseDistFromCenter / delta + offset);
 
@@ -145,25 +142,23 @@ export function circles (): void {
     selectedIndex = currCircleIndex;
 
     clearInterval(timer);
-    timer = setInterval(blick, 5000);
+    timer = setInterval(blick, showHintDelay);
   };
 }
 
 export const spiral = (): void => {
   clear();
 
-  anime.running.length = 0;
-  canvas.clear();
   const count = 35;
   const widthMax = 600;
   const widthMin = 130;
   const deltaWidth = (widthMax - widthMin) / count;
+  const rotationOffset = 0.09;
+  const rotationEndPoint = 2 * Math.PI;
 
   const squares = Array.from({ length: count }).map((square, i) =>
     canvas.makeRectangle(center.x, center.y, widthMin + deltaWidth * i, widthMin + deltaWidth * i)
   );
-
-  const rotationOffset = 0.09;
 
   squares.forEach((square, i) => {
     square.stroke = getColorOnRainbow(count, i);
@@ -172,8 +167,6 @@ export const spiral = (): void => {
     square.opacity = 1;
     square.rotation = rotationOffset * i;
   });
-
-  const rotationEndPoint = 2 * Math.PI;
 
   (function rotationAnimation () {
     const duration = 16000;
@@ -227,61 +220,56 @@ export function elasticSurface (): void {
   const count = 15;
   const diskTilt = degToRad(45);
   const axisTilt = degToRad(15);
+  const mainCircleR = 15;
+  const minR = 80;
+  const maxR = 400;
+  const delta = (maxR - minR) / count;
+  const axisLength = 400;
 
   const defaultColor = '#FFF';
   const defaultLineWidth = 1;
+  const hintCircleOpacity = 0.5;
+  const hintCirclesOpacity = 0.7;
   const getColor = getColorOnRainbow.bind(null, count);
 
-  const axisLength = 400;
+  function drawCircles (opacity = 1): Ellipse[] {
+    return Array.from({ length: count }).map((el, i) => {
+      const r = minR + delta * i;
+      const circle = canvas.makeEllipse(center.x, center.y, r, r);
+      circle.noFill();
+      circle.stroke = defaultColor;
+      circle.linewidth = defaultLineWidth;
+      circle.height = r * Math.sin(diskTilt);
+      circle.rotation = axisTilt;
+      circle.opacity = opacity;
+      return circle;
+    });
+  }
+
+  function drawMainCircle (opacity = 1): Circle {
+    const circle = canvas.makeCircle(center.x, center.y, mainCircleR);
+    circle.noStroke();
+    circle.opacity = opacity;
+    return circle;
+  }
+
   const end = coordsOnAxis(axisTilt, axisLength);
   const begin = coordsOnAxis(axisTilt, -axisLength);
   const axis = canvas.makeLine(begin.x, begin.y, end.x, end.y);
   axis.linewidth = 0.2;
   axis.stroke = defaultColor;
 
-  const minR = 80;
-  const maxR = 400;
-  const delta = (maxR - minR) / count;
+  const circles = drawCircles();
+  const hintCircles = drawCircles(hintCirclesOpacity);
 
-  const circles = Array.from({ length: count }).map((el, i) => {
-    const r = minR + delta * i;
-    const circle = canvas.makeEllipse(center.x, center.y, r, r);
-    circle.noFill();
-    circle.stroke = defaultColor;
-    circle.linewidth = defaultLineWidth;
-    circle.height = r * Math.sin(diskTilt);
-    circle.rotation = axisTilt;
-    return circle;
-  });
-
-  const mainCircleR = 15;
-  const mainCircle = canvas.makeCircle(center.x, center.y, mainCircleR);
-  mainCircle.noStroke();
-
-  const hintCirclesOpacity = 0.7;
-  const hintCircleOpacity = 0.5;
-
-  const hintCircles = Array.from({ length: count }).map((el, i) => {
-    const r = minR + delta * i;
-    const circle = canvas.makeEllipse(center.x, center.y, r, r);
-    circle.noFill();
-    circle.stroke = getColor(i);
-    circle.linewidth = defaultLineWidth;
-    circle.height = r * Math.sin(diskTilt);
-    circle.rotation = axisTilt;
-    circle.opacity = hintCirclesOpacity;
-    return circle;
-  });
-
-  const hintCircle = canvas.makeCircle(center.x, center.y, mainCircleR);
-  hintCircle.noStroke();
-  hintCircle.opacity = hintCircleOpacity;
+  const mainCircle = drawMainCircle();
+  const hintCircle = drawMainCircle(hintCircleOpacity);
 
   const hintTarget = {
     distance: 0
   };
 
-  const hintAnim = anime({
+  const hintAnimation = anime({
     targets: hintTarget,
     duration: 3500,
     distance: [0, 200, -40, 0],
@@ -319,7 +307,7 @@ export function elasticSurface (): void {
 
   function stopHint (): void {
     textAnim.pause();
-    hintAnim.pause();
+    hintAnimation.pause();
     hintText.style.opacity = '0';
     hintCircle.opacity = 0;
     hintCircles.forEach((circle) => {
@@ -330,11 +318,9 @@ export function elasticSurface (): void {
     });
   }
 
-  stopHint();
-
   function startHint (): void {
     textAnim.restart();
-    hintAnim.restart();
+    hintAnimation.restart();
     hintText.style.opacity = hintTextOpacity;
     hintCircle.opacity = hintCircleOpacity;
     hintCircles.forEach((circle) => {
@@ -352,7 +338,6 @@ export function elasticSurface (): void {
     time: animationDuration,
     blickOffset: 0
   };
-  let mouseY = 0;
 
   const deltas = Array.from({ length: count }).map(() => 0);
 
@@ -376,22 +361,13 @@ export function elasticSurface (): void {
     }
   });
 
+  const showHintDelay = 5000;
   let movingEnabled = false;
+
+  stopHint();
   let timer: NodeJS.Timeout = setTimeout(() => {
     startHint();
-  }, 5000);
-
-  document.onmousemove = (event) => {
-    if (movingEnabled) {
-      mouseY = center.y - event.clientY;
-      mainCircle.position = coordsOnAxis(axisTilt, mouseY);
-
-      circles.forEach((circle, i) => {
-        const deltaDist = mouseY / count * i;
-        circle.position = coordsOnAxis(axisTilt, mouseY - deltaDist);
-      });
-    }
-  };
+  }, showHintDelay);
 
   document.onmousedown = () => {
     movingEnabled = true;
@@ -405,6 +381,18 @@ export function elasticSurface (): void {
 
     timer = setTimeout(() => {
       startHint();
-    }, 5000);
+    }, showHintDelay);
+  };
+
+  document.onmousemove = (event) => {
+    if (movingEnabled) {
+      const mouseY = center.y - event.clientY;
+      mainCircle.position = coordsOnAxis(axisTilt, mouseY);
+
+      circles.forEach((circle, i) => {
+        const deltaDist = mouseY / count * i;
+        circle.position = coordsOnAxis(axisTilt, mouseY - deltaDist);
+      });
+    }
   };
 }
