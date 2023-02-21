@@ -6,7 +6,11 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
-        116: '28rem'
+        116: '28rem',
+        125: '32rem'
+      },
+      animation: {
+        'spin-slow': 'spin 2s linear infinite'
       }
     }
   },
