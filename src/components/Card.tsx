@@ -1,21 +1,21 @@
 import React from 'react';
 import './Card.css';
-import animationFlower from '../img/animation_circle.jpeg';
 
 interface Props {
   title: string
   description: string
+  animationImage: string
   animation: () => void
 }
 
-const Card = ({ title, description, animation }: Props): JSX.Element => {
+const Card = ({ title, description, animationImage, animation }: Props): JSX.Element => {
   return (
-    <div className="flex font-sans w-116 bg-white rounded-2xl main mt-4 overflow-hidden h-56">
+    <div className="flex font-sans w-116 bg-white rounded-2xl main mt-4 overflow-hidden h-60">
 
         <div className="flex-none w-60 relative">
-            <img src={animationFlower} alt="smthing" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <img src={animationImage} alt="smthing" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         </div>
-        <div className="flex-auto p-6">
+        <div className="flex-auto p-4">
             <div className="flex flex-wrap">
                 <p className="flex-auto text-4xl font-semibold  text-slate-900">
                     {title}
