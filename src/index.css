@@ -25,10 +25,12 @@ code {
   z-index: -1;
 }
 
-/* #cursor {
+#cursor {
   position: absolute;
   width: 6px;
   height: 6px;
   background-color: white;
   border-radius: 50%;
-} */
+  cursor: none;
+  display: none;
+}

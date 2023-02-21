@@ -1,10 +1,13 @@
 import React from 'react';
-import { BottomArrowIcon } from '../components/ArrowIcon';
 import './AnimationPage.css';
 import Next from '../img/next.png';
 import Previous from '../img/previous.png';
 
-const AnimationPage = (): JSX.Element => {
+interface Props {
+  openAnimation: () => void
+}
+
+const AnimationPage = ({ openAnimation }: Props): JSX.Element => {
   return (
     <>
       <div className='w-125 h-125 pl-4 pr-4'>
@@ -16,7 +19,8 @@ const AnimationPage = (): JSX.Element => {
         <br /><br />
         You can also use variant modifiers to target media queries like responsive breakpoints, dark mode, prefers-reduced-motion, and more. For example, use md:text-base to apply the text-base utility at only medium screen sizes and above. You can also use variant modifiers to target media queries like responsive breakpoints, dark mode, prefers-reduced-motion, and more.
         </p>
-        <button className='w-64 h-10 hover:bg-white hover:text-black font-semibold rounded-lg bg-black text-white border-2 border-white duration-300'>Back to animation</button>
+        <button className='w-64 h-10 hover:bg-white hover:text-black font-semibold rounded-lg bg-black text-white border-2 border-white duration-300'
+        onClick={openAnimation}>Back to animation</button>
       </div>
 
       <audio src='' id='audio'></audio>
@@ -47,7 +51,6 @@ const AnimationPage = (): JSX.Element => {
                 </button>
               </div>
             </div>
-            <BottomArrowIcon />
         </div>
     </>
   );
