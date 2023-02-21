@@ -9,7 +9,7 @@ interface Props {
 
 const AnimationPage = ({ openAnimation }: Props): JSX.Element => {
   return (
-    <>
+    <div className='w-full flex justify-evenly h-auto mt-8'>
       <div className='w-125 h-125 pl-4 pr-4'>
         <p className='text-5xl uppercase font-medium mb-4'>
           name
@@ -52,7 +52,7 @@ const AnimationPage = ({ openAnimation }: Props): JSX.Element => {
               </div>
             </div>
         </div>
-    </>
+    </div>
   );
 };
 
