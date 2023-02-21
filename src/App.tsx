@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import Footer from './components/Footer';
-import Header from './components/Header';
 import Catalog from './pages/Catalog';
+import { BottomArrowIcon } from './components/ArrowIcon';
+import { clear, turnOffCustomCursor } from './graphics';
 
 const App = (): JSX.Element => {
+  const [isCatalogOpen, setIsCatalogOpen] = useState(true);
+
   return (
     <>
-      <Header />
-      <Catalog />
-      <Footer />
+        {isCatalogOpen
+          ? <Catalog onChangeAnimation={() => { setIsCatalogOpen(false); }} />
+          : <BottomArrowIcon onClick={() => {
+            setIsCatalogOpen(true);
+            turnOffCustomCursor();
+            clear();
+          }}/>}
     </>
   );
 };

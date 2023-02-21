@@ -1,4 +1,12 @@
-import { canvas, center, clear, moveCursor, turnOnCustomCursor } from './graphics';
+import {
+  canvas,
+  center,
+  clear,
+  hideHintText,
+  hintText,
+  moveCursor, showHintText,
+  turnOnCustomCursor
+} from './graphics';
 import anime from 'animejs/lib/anime.es.js';
 import { lineLength, getColorOnRainbow, degToRad, coordsOnAxis } from './math';
 import { type Ellipse } from 'two.js/src/shapes/ellipse';
@@ -237,7 +245,7 @@ export function elasticSurface (): void {
       const r = minR + delta * i;
       const circle = canvas.makeEllipse(center.x, center.y, r, r);
       circle.noFill();
-      circle.stroke = defaultColor;
+      circle.stroke = getColor(i);
       circle.linewidth = defaultLineWidth;
       circle.height = r * Math.sin(diskTilt);
       circle.rotation = axisTilt;
@@ -285,16 +293,6 @@ export function elasticSurface (): void {
     }
   });
 
-  const hintTextOpacity = '0.5';
-  const hintText = document.createElement('h2');
-  hintText.innerText = 'Try to drag';
-  hintText.style.position = 'absolute';
-  hintText.style.color = 'white';
-  hintText.style.top = '12%';
-  hintText.style.right = '20%';
-  hintText.style.opacity = hintTextOpacity;
-  document.body.append(hintText);
-
   const textAnim = anime({
     targets: hintText,
     opacity: '+=0.2',
@@ -308,7 +306,7 @@ export function elasticSurface (): void {
   function stopHint (): void {
     textAnim.pause();
     hintAnimation.pause();
-    hintText.style.opacity = '0';
+    hideHintText();
     hintCircle.opacity = 0;
     hintCircles.forEach((circle) => {
       circle.opacity = 0;
@@ -321,7 +319,7 @@ export function elasticSurface (): void {
   function startHint (): void {
     textAnim.restart();
     hintAnimation.restart();
-    hintText.style.opacity = hintTextOpacity;
+    showHintText();
     hintCircle.opacity = hintCircleOpacity;
     hintCircles.forEach((circle) => {
       circle.opacity = hintCirclesOpacity;

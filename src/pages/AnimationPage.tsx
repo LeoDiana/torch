@@ -1,5 +1,4 @@
 import React from 'react';
-import { BottomArrowIcon } from '../components/ArrowIcon';
 import './AnimationPage.css';
 import Next from '../img/next.png';
 import Previous from '../img/previous.png';
@@ -47,7 +46,6 @@ const AnimationPage = (): JSX.Element => {
                 </button>
               </div>
             </div>
-            <BottomArrowIcon />
         </div>
     </>
   );
