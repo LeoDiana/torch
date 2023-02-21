@@ -4,7 +4,7 @@ import {
   clear,
   hideHintText,
   hintText,
-  moveCursor, showHintText,
+  moveCursor, setTimer, showHintText,
   turnOnCustomCursor
 } from './graphics';
 import anime from 'animejs/lib/anime.es.js';
@@ -363,9 +363,10 @@ export function elasticSurface (): void {
   let movingEnabled = false;
 
   stopHint();
-  let timer: NodeJS.Timeout = setTimeout(() => {
+  let timer = setTimeout(() => {
     startHint();
   }, showHintDelay);
+  setTimer(timer);
 
   document.onmousedown = () => {
     movingEnabled = true;
@@ -380,6 +381,7 @@ export function elasticSurface (): void {
     timer = setTimeout(() => {
       startHint();
     }, showHintDelay);
+    setTimer(timer);
   };
 
   document.onmousemove = (event) => {

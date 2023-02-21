@@ -1,15 +1,17 @@
 import React from 'react';
 import './ArrowIcon.css';
 
-export const RightArrowIcon = (): JSX.Element => {
-  return (
-    <a href="#" className="fixed top-1/2 right-0 mr-10 arrow animate-pulse"></a>
-  );
-};
-
 interface Props {
   onClick: () => void
 }
+
+export const RightArrowIcon = ({ onClick }: Props): JSX.Element => {
+  return (
+    <a className="fixed top-1/2 right-0 mr-10 arrow animate-pulse"
+       onClick={onClick}
+    ></a>
+  );
+};
 
 export const BottomArrowIcon = ({ onClick }: Props): JSX.Element => {
   return (

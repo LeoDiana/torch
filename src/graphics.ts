@@ -12,6 +12,11 @@ export const center = {
   y: canvas.height / 2
 };
 
+let timer: NodeJS.Timeout;
+export const setTimer = (t: NodeJS.Timeout): void => {
+  timer = t;
+};
+
 const cursor = document.querySelector('#cursor') as HTMLElement;
 
 export const turnOnCustomCursor = (): void => {
@@ -33,6 +38,7 @@ export const clear = (): void => {
   canvas.clear();
   anime.running.length = 0;
   hideHintText();
+  clearTimeout(timer);
 };
 
 export const hintTextOpacity = '0.5';
