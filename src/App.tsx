@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import './App.css';
-import { BottomArrowIcon } from './components/ArrowIcon';
+import { BottomArrowIcon, RightArrowIcon } from './components/ArrowIcon';
 import { clear, turnOffCustomCursor } from './graphics';
 import Header from './components/Header';
 import Catalog from './pages/Catalog';
@@ -44,6 +44,7 @@ const animationOnStart = catalog[2].animation;
 const initialAnimationState = () => () => animationOnStart;
 
 const App = (): JSX.Element => {
+  const [isJustStarted, setIsJustStarted] = useState(true);
   const [currentAnimation, setCurrentAnimation] = useState<() => void>(initialAnimationState);
   const [openedPage, dispatch] = useReducer(reducer, 'animation');
 
@@ -51,33 +52,40 @@ const App = (): JSX.Element => {
     animationOnStart();
   }, []);
 
+  if (openedPage === 'animation') {
+    return isJustStarted
+      ? (<RightArrowIcon onClick={() => {
+          setIsJustStarted(false);
+          dispatch(openCatalog());
+          clear();
+        }
+        }/>)
+      : (<BottomArrowIcon onClick={() => {
+          dispatch(openAnimationPage());
+          turnOffCustomCursor();
+          clear();
+        }}/>);
+  }
+
   return (
-        <>
-            {openedPage === 'animation'
-              ? <BottomArrowIcon onClick={() => {
-                dispatch(openAnimationPage());
-                turnOffCustomCursor();
+    <>
+      <Header onClick={() => {
+        dispatch(openCatalog());
+      }}/>
+      {openedPage === 'catalog' &&
+          <Catalog
+              setCurrentAnimation={setCurrentAnimation}
+              onChangeAnimation={() => {
+                dispatch(openAnimation());
                 clear();
-              }}/>
-              : (<>
-                    <Header onClick={() => {
-                      dispatch(openCatalog());
-                    }}/>
-                    {openedPage === 'catalog' &&
-                        <Catalog
-                            setCurrentAnimation={setCurrentAnimation}
-                            onChangeAnimation={() => {
-                              dispatch(openAnimation());
-                              clear();
-                            }}/>}
-                    {openedPage === 'animationPage' &&
-                        <AnimationPage openAnimation={() => {
-                          dispatch(openAnimation());
-                          currentAnimation();
-                        }}/>}
-                    <Footer/>
-                </>)}
-        </>
+              }}/>}
+      {openedPage === 'animationPage' &&
+          <AnimationPage openAnimation={() => {
+            dispatch(openAnimation());
+            currentAnimation();
+          }}/>}
+      <Footer/>
+  </>
   );
 };
 
