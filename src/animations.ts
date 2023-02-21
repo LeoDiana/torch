@@ -3,7 +3,6 @@ import {
   center,
   clear,
   hideHintText,
-  hintText,
   moveCursor, setTimer, showHintText,
   turnOnCustomCursor
 } from './graphics';
@@ -293,18 +292,7 @@ export function elasticSurface (): void {
     }
   });
 
-  const textAnim = anime({
-    targets: hintText,
-    opacity: '+=0.2',
-    scale: 1.03,
-    loop: true,
-    duration: 1000,
-    direction: 'alternate',
-    easing: 'linear'
-  });
-
   function stopHint (): void {
-    textAnim.pause();
     hintAnimation.pause();
     hideHintText();
     hintCircle.opacity = 0;
@@ -317,7 +305,6 @@ export function elasticSurface (): void {
   }
 
   function startHint (): void {
-    textAnim.restart();
     hintAnimation.restart();
     showHintText();
     hintCircle.opacity = hintCircleOpacity;

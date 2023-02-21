@@ -34,3 +34,10 @@ code {
   cursor: none;
   display: none;
 }
+
+#hint-text {
+  position: absolute;
+  color: white;
+  top: 12%;
+  right: 20%;
+}

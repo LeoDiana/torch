@@ -41,20 +41,7 @@ export const clear = (): void => {
   clearTimeout(timer);
 };
 
-export const hintTextOpacity = '0.5';
-const createHintText = (): HTMLElement => {
-  const hintText = document.createElement('h2');
-  hintText.innerText = 'Try to drag';
-  hintText.style.position = 'absolute';
-  hintText.style.color = 'white';
-  hintText.style.top = '12%';
-  hintText.style.right = '20%';
-  hintText.style.opacity = hintTextOpacity;
-  (document.querySelector('#hint-text') as HTMLElement).append(hintText);
-  return hintText;
-};
-
-export const hintText = createHintText();
+export const hintText = document.querySelector('#hint-text') as HTMLElement;
 
 export const showHintText = (): void => {
   hintText.style.display = 'block';
