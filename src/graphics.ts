@@ -32,6 +32,7 @@ export const moveCursor = (x: number, y: number): void => {
 export const clear = (): void => {
   canvas.clear();
   anime.running.length = 0;
+  hideHintText();
 };
 
 export const hintTextOpacity = '0.5';

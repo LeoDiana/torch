@@ -13,7 +13,7 @@ interface Props {
 
 export const BottomArrowIcon = ({ onClick }: Props): JSX.Element => {
   return (
-      <a href="#" className="fixed left-1/2 -translate-x-1/2 bottom-0 mb-10 arrow animate-pulse rotate-90"
+      <a className="fixed left-1/2 -translate-x-1/2 bottom-0 mb-10 arrow animate-pulse rotate-90"
       onClick={onClick}></a>
   );
 };
