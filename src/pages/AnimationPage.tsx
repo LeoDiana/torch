@@ -18,7 +18,7 @@ const AnimationPage = ({ openAnimation }: Props): JSX.Element => {
         <p className='font-light text-base leading-7 mb-5'>
           Take a deep breath and close your eyes while you listen to specific music. Imagine the animation you saw, try to detail all the lines. Here we`ve used simple math to bring together vibrant geometry and consistent transformations.
         <br /><br />
-          You can also use variant modifiers to target media queries like responsive breakpoints, dark mode, prefers-reduced-motion, and more. For example, use md:text-base to apply the text-base utility at only medium screen sizes and above. You can also use variant modifiers to target media queries like responsive breakpoints, dark mode, prefers-reduced-motion, and more.
+        The patterns may be accompanied by a soundtrack that complements the visual display, creating a fully immersive experience for the viewer. The colors and patterns may change rapidly, creating a sense of movement and transformation that can be both captivating and unsettling. It might be designed to provoke thought and reflection on themes related to perception, consciousness, or the nature of reality. The animation itself might be a series of rapidly flashing or flickering geometric shapes, lines, and colors that create a mesmerizing and disorienting effect.
         </p>
         <button className='w-64 h-10 hover:bg-white hover:text-black font-semibold rounded-lg bg-black text-white border-2 border-white duration-300'
         onClick={openAnimation}>Back to animation</button>
@@ -33,8 +33,8 @@ const AnimationPage = ({ openAnimation }: Props): JSX.Element => {
               <div className={`block w-44 h-44 rounded-full disk ${isPaused ? '' : 'play'} bg-cover animate-spin-slow before:absolute before:rounded-full before:bg-black before:h-8 before:w-8`}></div>
 
               <div className='song-slider w-full relative'>
-                <input type='range' min='0' max='100' defaultValue='3' step='1' className='seek-bar w-full h-2 rounded-lg cursor-pointer overflow-hidden' />
-                <span className='current-time'>00:00</span>
+                <input type='range' min='1' max='193' defaultValue='38' step='1' className='seek-bar w-full h-2 rounded-lg cursor-pointer overflow-hidden' />
+                <span className='current-time'>00:38</span>
                 <span className='song-duration absolute right-0'>3:13</span>
               </div>
 
