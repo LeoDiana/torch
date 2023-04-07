@@ -76,8 +76,8 @@ const App = (): JSX.Element => {
           <Catalog
               setCurrentAnimation={setCurrentAnimation}
               onChangeAnimation={() => {
-                dispatch(openAnimation());
                 clear();
+                dispatch(openAnimation());
               }}/>}
       {openedPage === 'animationPage' &&
           <AnimationPage openAnimation={() => {
