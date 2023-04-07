@@ -1,7 +1,7 @@
-import { circles, elasticSurface, spiral } from './animations';
 import animationElastic from './img/animation_elastic.png';
 import animationSpiral from './img/animation_spiral.png';
 import animationCircles from './img/animation_circles.png';
+import { circles, elasticSurface, spiral } from './animations';
 
 interface AnimationData {
   id: number
