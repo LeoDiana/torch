@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/torch/static/css/main.bf06339e.css",
+    "main.js": "/torch/static/js/main.b2f3d282.js",
+    "static/js/787.372b623a.chunk.js": "/torch/static/js/787.372b623a.chunk.js",
+    "static/media/animation_logo.gif": "/torch/static/media/animation_logo.252efb5c482cf22686e6.gif",
+    "static/media/animation_circles.png": "/torch/static/media/animation_circles.1a41b614d19d361973a5.png",
+    "static/media/animation_spiral.png": "/torch/static/media/animation_spiral.c04fa6aee3b3572f45e0.png",
+    "static/media/animation_elastic.png": "/torch/static/media/animation_elastic.efb092431247bf804f12.png",
+    "index.html": "/torch/index.html",
+    "main.bf06339e.css.map": "/torch/static/css/main.bf06339e.css.map",
+    "main.b2f3d282.js.map": "/torch/static/js/main.b2f3d282.js.map",
+    "787.372b623a.chunk.js.map": "/torch/static/js/787.372b623a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bf06339e.css",
+    "static/js/main.b2f3d282.js"
+  ]
+}
